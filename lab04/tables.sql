@@ -1,0 +1,54 @@
+DROP TABLE KOCIECKI.DIM_PRODUCT;
+DROP TABLE KOCIECKI.DIM_CUSTOMER;
+DROP TABLE KOCIECKI.DIM_SALESPERSON;
+DROP TABLE KOCIECKI.FACT_SALES;
+
+
+CREATE TABLE KOCIECKI.DIM_CUSTOMER (
+    CustomerID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Title NVARCHAR(10),
+    City NVARCHAR(50),
+    TerritoryName NVARCHAR(50),
+    CountryRegionCode NVARCHAR(10),
+    [Group] NVARCHAR(50),
+);
+
+
+CREATE TABLE KOCIECKI.DIM_PRODUCT (
+    ProductID INT PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    ListPrice DECIMAL(18,2) NOT NULL,
+    Color NVARCHAR(50),
+    SubCategoryName NVARCHAR(100),
+    CategoryName NVARCHAR(100),
+    Weight DECIMAL(18,2),
+    Size NVARCHAR(50),
+    IsPurchased BIT NOT NULL,
+);
+
+
+CREATE TABLE KOCIECKI.DIM_SALESPERSON (
+    SalesPersonID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Title NVARCHAR(10),
+    Gender NVARCHAR(1),
+    CountryRegionCode NVARCHAR(3),
+    [Group] NVARCHAR(50),
+	);
+
+
+CREATE TABLE KOCIECKI.FACT_SALES (
+    FactID INT IDENTITY(1,1) PRIMARY KEY,  
+    ProductID INT,  
+    CustomerID INT, 
+    SalesPersonID INT, 
+    OrderDate INT NOT NULL,
+    ShipDate INT,
+    OrderQty INT NOT NULL,
+    UnitPrice DECIMAL(18, 2) NOT NULL,
+    UnitPriceDiscount DECIMAL(18, 2) NOT NULL,
+    LineTotal DECIMAL(18, 2) NOT NULL,
+);
